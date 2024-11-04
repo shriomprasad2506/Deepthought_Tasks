@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nudge API</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 15px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #0f6ab4;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        h2 {
+            font-size: 1.5em;
+        }
+
+        h3 {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        hr {
+            height: 1px;
+            background-color: #ddd;
+            border: none;
+            margin: 16px 0;
+        }
+
+        .app-desc,
+        .license-info,
+        .model {
+            margin-left: 20px;
+        }
+
+        /* Styling for methods */
+        .method-path {
+            font-size: 1.2em;
+            margin: 10px 0;
+            padding: 8px;
+            background-color: #0f6ab4;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .http-method {
+            font-weight: bold;
+        }
+
+        .method {
+            margin-bottom: 20px;
+        }
+
+        .method-summary,
+        .method-notes {
+            margin-left: 20px;
+        }
+
+        .get {
+            background-color: #0f6ab4;
+        }
+
+        .post {
+            background-color: #10a54a;
+        }
+
+        .put {
+            background-color: #c5862b;
+        }
+
+        .delete {
+            background-color: #a41e22;
+        }
+
+        pre,
+        .example,
+        .param-desc,
+        .return-type {
+            padding: 10px;
+            background-color: #f3f3f3;
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .param,
+        .param-desc,
+        .field-label {
+            margin-bottom: 10px;
+        }
+
+        .param-header {
+            font-weight: bold;
+        }
+
+        .field-items {
+            padding: 10px 0;
+        }
+
+        .model {
+            padding-left: 20px;
+        }
+
+        /* Table of contents styling */
+        nav {
+            position: fixed;
+            top: 0;
+            padding: 10px;
+            height: 100%;
+            width: 210px;
+            display: block;
+            background: #f9f9f9;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            margin-right: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav li a {
+            color: #0f6ab4;
+            text-decoration: none;
+        }
+
+        .method-tag {
+            display: inline-block;
+            background-color: #24A600;
+            color: #FFF;
+            padding: 3px 8px;
+            margin: 5px;
+            border-radius: 3px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                font-size: 14px;
+                margin-right: 0;
+            }
+
+            .method-path {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header style="margin-left: 240px;margin-right: 100px;">
+        <h1>Nudge API</h1>
+        <p class="app-desc">API for creating and managing nudges related to events or articles.</p>
+        <p class="app-desc">Version: 1.0.0</p>
+        <p class="license-info">All rights reserved</p>
+    </header>
+
+    <nav>
+        <h2>Table of Contents</h2>
+        <h3 style="margin-left: 3px;">Methods</h3>
+        <ul style="margin-left:9px">
+            <li><a href="#nudgeIdDelete">Delete Nudge</a></li>
+            <li><a href="#nudgeIdGet">Get Nudge Details</a></li>
+            <li><a href="#nudgeIdPut">Update Nudge</a></li>
+            <li><a href="#nudgePost">Create Nudge</a></li>
+        </ul>
+        <h3 style="margin-left: 3px;">Models</h3>
+        <ul style="margin-left:9px">
+            <li><a href="#Nudge">Nudge</a></li>
+            <li><a href="#NudgeResponse">Nudge Response</a></li>
+        </ul>
+    </nav>
+
+    <main style="margin-left: 240px;margin-right: 100px;">
+        <!-- Delete Nudge Section -->
+        <section id="nudgeIdDelete" class="method">
+            <div class="method-path delete"><span class="http-method">DELETE</span> /nudge/{id}</div>
+            <p class="method-summary">Delete a nudge (<span class="nickname">nudgeIdDelete</span>)</p>
+            <p class="method-notes">Remove a nudge from the system by its ID.</p>
+
+            <h3>Path Parameters</h3>
+            <div class="field-items">
+                <div class="param">id (required)</div>
+                <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Unique identifier for the
+                    nudge</div>
+            </div>
+
+            <h3>Responses</h3>
+            <p>204: Nudge deleted successfully</p>
+            <p>404: Nudge not found</p>
+        </section>
+
+        <hr />
+
+        <!-- Get Nudge Details Section -->
+        <section id="nudgeIdGet" class="method">
+            <div class="method-path"><span class="http-method">GET</span> /nudge/{id}</div>
+            <p class="method-summary">Get details of a nudge (<span class="nickname">nudgeIdGet</span>)</p>
+            <p class="method-notes">Fetches details of a nudge by its ID.</p>
+
+            <h3>Path Parameters</h3>
+            <div class="field-items">
+                <div class="param">id (required)</div>
+                <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Unique identifier for the
+                    nudge</div>
+            </div>
+
+            <h3 class="field-label">Return type</h3>
+            <div class="return-type">
+                <a href="#NudgeResponse">NudgeResponse</a>
+
+            </div>
+
+            <h3 class="field-label">Example data</h3>
+            <div class="example-data-content-type">Content-Type: application/json</div>
+            <pre class="example"><code>{
+  "image" : "image",
+  "scheduledTime" : "scheduledTime",
+  "icon" : "icon",
+  "scheduledDate" : "2000-01-23",
+  "description" : "description",
+  "invitationText" : "invitationText",
+  "id" : "id",
+  "tag" : "tag",
+  "title" : "title"
+}           </code></pre>
+
+            <h3 class="field-label">Produces</h3>
+            This API call produces the following media types according to the <span class="header">Accept</span> request
+            header;
+            the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+            <ul style="margin-left: 20px;">
+                <li><code>application/json</code></li>
+            </ul>
+
+            <h3>Responses</h3>
+            <p>200: Nudge details retrieved successfully</p>
+            <p>404: Nudge not found</p>
+        </section>
+
+        <hr />
+
+        <!-- Update Nudge Section -->
+        <section id="nudgeIdPut" class="method">
+            <div class="method-path put"><span class="http-method">PUT</span> /nudge/{id}</div>
+            <p class="method-summary">Update a nudge (<span class="nickname">nudgeIdPut</span>)</p>
+            <p class="method-notes">Updates an existing nudge's details by its ID.</p>
+
+            <h3>Path Parameters</h3>
+            <div class="field-items">
+                <div class="param">id (required)</div>
+                <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Unique identifier for the
+                    nudge</div>
+            </div>
+
+            <h3 class="field-label">Consumes</h3>
+            This API call consumes the following media types via the <span class="header">Content-Type</span> request
+            header:
+            <ul style="margin-left: 20px;">
+                <li><code>application/json</code></li>
+            </ul>
+
+            <h3 class="field-label">Request body</h3>
+            <div class="field-items">
+                <div class="param">body <a href="#Nudge">Nudge</a> (required)</div>
+
+                <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Provide updated details
+                    of the nudge in JSON format. </div>
+            </div>
+
+            <!--Todo: process Response Object and its headers, schema, examples -->
+
+            <h3 class="field-label">Example data</h3>
+            <div class="example-data-content-type">Content-Type: application/json</div>
+            <pre class="example"><code>{
+  "image" : "image",
+  "scheduledTime" : "scheduledTime",
+  "icon" : "icon",
+  "scheduledDate" : "2000-01-23",
+  "description" : "description",
+  "invitationText" : "invitationText",
+  "id" : "id",
+  "tag" : "tag",
+  "title" : "title"
+}</code></pre>
+
+            <h3>Responses</h3>
+            <p>200: Nudge updated successfully</p>
+            <p>400: Invalid Data</p>
+            <p>404: Nudge not found</p>
+        </section>
+
+        <hr />
+
+        <!-- Create Nudge Section -->
+        <section id="nudgePost" class="method">
+            <div class="method-path post"><span class="http-method">POST</span> /nudge</div>
+            <p class="method-summary">Create a new nudge (<span class="nickname">nudgePost</span>)</p>
+            <p class="method-notes">Creates a new nudge in the system.</p>
+
+            <h3 class="field-label">Consumes</h3>
+            This API call consumes the following media types via the <span class="header">Content-Type</span> request
+            header:
+            <ul style="margin-left: 20px;">
+                <li><code>application/json</code></li>
+            </ul>
+
+            <h3>Request Body</h3>
+            <div class="field-items">
+                <div class="param">body <a href="#Nudge">Nudge</a> (required)</div>
+
+                <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Provide details of the
+                    nudge to be created in JSON format. </div>
+            </div>
+
+            <h3 class="field-label">Example data</h3>
+            <div class="example-data-content-type">Content-Type: application/json</div>
+            <pre class="example"><code>{
+    "image" : "image",
+    "scheduledTime" : "scheduledTime",
+    "icon" : "icon",
+    "scheduledDate" : "2000-01-23",
+    "description" : "description",
+    "invitationText" : "invitationText",
+    "id" : "id",
+    "tag" : "tag",
+    "title" : "title"
+}</code></pre>
+
+            <h3>Responses</h3>
+            <p>201: Nudge created successfully</p>
+            <p>400: Invalid request</p>
+        </section>
+    </main>
+
+    <div class="model" style="margin-left: 240px;margin-right: 100px;">
+        <h1><a name="Nudge"><code>Nudge</code></a> </h1>
+
+        <div class="field-items">
+            <div class="param">title </div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Title of the nudge
+            </div>
+            <div class="param">tag </div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Tag for the event or
+                article
+                related to the nudge </div>
+            <div class="param">image (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#binary">byte[]</a></span> Image URL or binary
+                data for
+                the nudge cover format: binary</div>
+            <div class="param">scheduledDate </div>
+            <div class="param-desc"><span class="param-type"><a href="#date">date</a></span> Scheduled date for the
+                nudge
+                (format: YYYY-MM-DD) format: date</div>
+            <div class="param">scheduledTime </div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Scheduled time for the
+                nudge
+                (format: HH:MM) format: time</div>
+            <div class="param">description (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Detailed description of
+                the
+                nudge </div>
+            <div class="param">icon (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Icon URL or data for
+                the
+                nudge preview </div>
+            <div class="param">invitationText (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> One-line invitation
+                message
+                for minimized nudge view </div>
+        </div> <!-- field-items -->
+    </div>
+    <div class="model" style="margin-left: 240px; margin-right: 100px;">
+        <h1><a name="NudgeResponse"><code>NudgeResponse</code></h1>
+
+        <div class="field-items">
+            <div class="param">id (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Unique identifier for
+                the
+                nudge </div>
+            <div class="param">title (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Title of the nudge
+            </div>
+            <div class="param">tag (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Tag for the event or
+                article
+            </div>
+            <div class="param">image (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Image URL or binary
+                data for
+                the nudge cover </div>
+            <div class="param">scheduledDate (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#date">date</a></span> Scheduled date for the
+                nudge
+                format: date</div>
+            <div class="param">scheduledTime (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Scheduled time for the
+                nudge
+                format: time</div>
+            <div class="param">description (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Detailed description of
+                the
+                nudge </div>
+            <div class="param">icon (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Icon URL or data for
+                the
+                nudge preview </div>
+            <div class="param">invitationText (optional)</div>
+            <div class="param-desc"><span class="param-type"><a href="#string">String</a></span> One-line invitation
+                message
+                for minimized nudge view </div>
+        </div> <!-- field-items -->
+    </div>
+</body>
+</html.
