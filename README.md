@@ -79,4 +79,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgments
 - Inspired by various event management platforms.
-- Special thanks to [insert any individuals or resources here].
+- Special thanks.
